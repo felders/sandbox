@@ -12,8 +12,8 @@ echo Editable::widget([
     'attribute' => 'name',
     'inputType' => Editable::INPUT_TEXT,
     'options'=> [
-      'id' => 'fakeDisplay'
-    ]
+      'id' => 'fakeDisplay1'
+    ],
 ]);
 
 ?>
