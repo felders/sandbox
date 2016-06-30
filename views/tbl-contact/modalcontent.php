@@ -4,6 +4,7 @@ use kartik\sortable\Sortable;
 
 
 echo Sortable::widget([
+    'id' => 'test-1',
     'connected'=>true,
     'items'=>[
         ['content'=>'From Item 1'],
@@ -13,6 +14,7 @@ echo Sortable::widget([
     ]
 ]);
 echo Sortable::widget([
+    'id' => 'test-2',
     'connected'=>true,
     'itemOptions'=>['class'=>'alert alert-warning'],
     'items'=>[
