@@ -1,51 +1,63 @@
-<script>
-
-function createTab(content) {
-  $('div.active').removeClass('active').removeClass('in');
-  $('li.active').removeClass('active');
-
-	$('#myTab').append('<li><a href="#tab3" data-toggle="tab">Tab 3</a></li>');
-
-	$('#tabContents').append('<div class="tab-pane active" id="tab3">' + content + '</div>');
-}
-
-
-$(document).ready(function() {
-
-	$(".addTab").click(function() {
-
-		$.get("index.php?r=tbl-contact/get-new-tab&id=3", function (content) {
-			createTab(content);
-		});
-
-	});
-
-});
-
-
-</script>
-
-<ul class="nav nav-tabs responsive" id="myTab">
-<li><a href="#tab1" data-toggle="tab">Tab 1</a></li>
-<li><a href="#tab2" data-toggle="tab">Tab 2</a></li>
-</ul>
-<div class="tab-content responsive" id="tabContents">
-
-<div class="tab-pane active" id="tab1">
 <?php
 
-echo $this->render('tab1');
+\kartik\editable\EditableAsset::register($this);
+\kartik\editable\EditablePjaxAsset::register($this);
+\kartik\base\WidgetAsset::register($this);
+\yii\widgets\ActiveFormAsset::register($this);
+\kartik\popover\PopoverXAsset::register($this);
 
+use yii\bootstrap\Tabs;
+
+$this->registerJs(<<<JS
+$("#add").on("click", function(e){
+	
+		$.get("index.php?r=tbl-contact/get-new-tab&id=3", function (content) {
+			$("#myveryownID").html(content);
+			
+			initEditablePopover("fakeDisplaynew-targ");
+		
+		});
+});
+
+JS
+);
 ?>
-<br /><br />
-<a href="#" class="addTab">Add Tab - AJAX</a>
 
+<?php
 
-</div>
+echo Tabs::widget([
+	'items' => [
+		[
+			'label' => 'One',
+			'content' => 'Rush second tab',
+			'active' => true
+		],
+		[
+			'label' => 'Two',
+			'content' => 'test',
+            'options' => ['id' => 'myveryownID'],
+        ],
+        [
+			'label' => 'Example',
+			'url' => 'http://www.example.com',
+		],
+        [
+			'label' => 'Dropdown',
+			'items' => [
+				[
+					'label' => 'DropdownA',
+					'content' => 'DropdownA, Anim pariatur cliche...',
+				],
+				[
+					'label' => 'DropdownB',
+					'content' => 'DropdownB, Anim pariatur cliche...',
+				],
+			],
+		],
+    ],
+]);
 
-<div class="tab-pane" id="tab2">
-def
-</div>
+//echo file_get_contents('http://sandbox.dev/index.php?r=tbl-contact/get-new-tab&id=3');
+?>
 
-</div>
-
+<button id="add">test</button>
