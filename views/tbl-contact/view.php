@@ -13,7 +13,8 @@ $("#add").on("click", function(e){
 	
 		$.get("index.php?r=tbl-contact/get-new-tab&id=3", function (content) {
 			$("#myveryownID").html(content);
-			
+			var editable_605310e3 = {"valueIfNull":"\u003Cem\u003E(not set)\u003C\/em\u003E","asPopover":true,"placement":"right","target":".kv-editable-link","displayValueConfig":[],"showAjaxErrors":true,"ajaxSettings":[],"submitOnEnter":true,"encodeOutput":true};
+			jQuery("#fakeDisplaynew-cont").editable(editable_605310e3);
 			initEditablePopover("fakeDisplaynew-targ");
 		
 		});
